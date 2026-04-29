@@ -624,9 +624,7 @@ overflow-y: autoScroll interne si contenu long
 
 
 
-
-
-Éléments NOUVEAUX dans page4.html (Contact) 🆕
+Éléments NOUVEAUX dans page4.html 
 
 1 — UP-text simple (sans image ni dégradé)
 Page 4 n'utilise ni image ni dégradé pour le hero. Juste un <div> simple sur fond blanc :
