@@ -651,7 +651,7 @@ html<div class="page-title">
 }
  Nouveautés par rapport aux pages précédentes :
 PropriétéCe qu'elle faitborder-left: 5px solid var(--gold)Barre dorée à gauche (pas en haut comme avant)border-radius: 0 8px 8px 0Coins arrondis à droite seulement (0 à gauche car la barre est là)
-Pages 1/2/3 avaient border-top (barre en haut). Page 4 a border-left (barre à gauche). ✅
+Pages 1/2/3 avaient border-top (barre en haut). Page 4 a border-left (barre à gauche). 
 Le .card-header
 .contact-card .card-header {
     display: flex;
