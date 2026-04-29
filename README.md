@@ -504,7 +504,7 @@ updateCounter(); // Affiche "1 / 4" au départ
 updateCounter() est aussi appelée dans goTo() pour mettre à jour à chaque changement.
 Différence avec page 2
 Page 2 → pas de compteur
-Page 3 → compteur "1 / 4" en haut à droite ✅
+Page 3 → compteur "1 / 4" en haut à droite 
 
  3 — L'ombre sur les slides
 .excursion-slider .slide::after {
