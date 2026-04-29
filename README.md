@@ -1,3 +1,4 @@
+CE PROJET EST REALISER PAR HIBATOLLAH RIDA ET ARWA M'BARKI GRTP:01 
 Explication complète du code HTML/CSS et JAVASCRIPT
 les balises essentielle utilises:
 <html>Racine de toute la page
