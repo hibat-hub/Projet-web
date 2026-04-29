@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <title>Avis — Trips with Sara</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;600&display=swap" rel="stylesheet"/>
+    <style>
+ 
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+ 
+:root {
+    --gold: #c9a84c;
+    --dark: #1a1a1a;
+    --bg: #faf9f7;
+    --text: #2c2c2c;
+    --muted: #9a9489;
+}
+ 
+body {
+    font-family: 'Lato', sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+}
+ 
+/* ===== HEADER ===== */
+header {
+    background-color: rgba(26,26,26,0.95);
+    backdrop-filter: blur(10px);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 50px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid rgba(201,168,76,0.3);
+    flex-wrap: wrap;
+}
+ 
+.logo img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+ 
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    width: 34px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 4px;
+}
+.hamburger span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: var(--gold);
+    border-radius: 2px;
+}
+ 
+nav { display: flex; align-items: center; }
+ 
+nav a {
+    color: #ddd;
+    padding: 6px 14px;
+    text-decoration: none;
+    font-size: 0.85em;
+    text-transform: uppercase;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    position: relative;
+}
+ 
+nav a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 0;
+    height: 2px;
+    background: var(--gold);
+    transition: width 0.3s ease;
+}
+ 
+nav a:hover { color: var(--gold); }
+nav a:hover::after { width: 100%; }
+nav a.active { color: var(--gold); }
+nav a.active::after { width: 100%; }
+ 
+/* ===== HERO ===== */
+.hero {
+    margin-top: 116px;
+    min-height: 340px;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2c2416 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 40px 60px;
+    position: relative;
+    overflow: hidden;
+}
+ 
+.hero-lines {
+    position: absolute; inset: 0;
+    background-image: repeating-linear-gradient(90deg, rgba(201,168,76,0.04) 0px, rgba(201,168,76,0.04) 1px, transparent 1px, transparent 80px);
+    pointer-events: none;
+}
+ 
+.hero-glow {
+    position: absolute;
+    width: 600px; height: 300px;
+    background: radial-gradient(ellipse, rgba(201,168,76,0.07) 0%, transparent 70%);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+ 
+.hero-eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 18px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+    border: 1px solid rgba(201,168,76,0.4);
+    padding: 6px 20px;
+    display: inline-block;
+}
+ 
+.hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.2rem;
+    font-weight: 600;
+    color: #fff;
+    line-height: 1.1;
+    letter-spacing: 0.03em;
+    margin-bottom: 16px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.4s forwards;
+}
+ 
+.hero h1 span { color: var(--gold); font-style: italic; }
+ 
+.hero-sub {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 300;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.6s forwards;
+}
+ 
+.PARAG {
+    width: 60px;
+    height: 2px;
+    background: var(--gold);
+    margin: 22px auto 0;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.8s forwards;
+}
+ 
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+ 
+/* ===== MAIN LAYOUT ===== */
+.main {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 90px 40px;
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 80px;
+    align-items: start;
+}
+ 
+/* ===== FORM SIDE ===== */
+.side-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 14px;
+}
+ 
+.side-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: var(--dark);
+    line-height: 1.15;
+    margin-bottom: 10px;
+}
+ 
+.side-title em { font-style: italic; color: var(--gold); }
+ 
+.side-desc {
+    font-size: 0.88rem;
+    color: #777;
+    line-height: 1.8;
+    font-weight: 300;
+    margin-bottom: 36px;
+    max-width: 320px;
+}
+ 
+/* ===== FORM ===== */
+.review-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+ 
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+ 
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+ 
+.form-group label {
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+}
+ 
+.form-group input,
+.form-group select,
+.form-group textarea {
+    background: #fff;
+    border: 1px solid #e0d8cc;
+    border-bottom: 2px solid #e0d8cc;
+    padding: 12px 16px;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.25s;
+    appearance: none;
+    border-radius: 0;
+}
+ 
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-bottom-color: var(--gold);
+}
+ 
+.form-group textarea {
+    resize: none;
+    height: 120px;
+    line-height: 1.7;
+}
+ 
+/* STARS */
+.stars-group { gap: 10px; }
+ 
+.stars-label-top {
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+}
+ 
+.stars-input {
+    display: flex;
+    gap: 6px;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+}
+ 
+.stars-input input { display: none; }
+ 
+.stars-input label {
+    font-size: 1.6rem;
+    color: #ddd;
+    cursor: pointer;
+    transition: color 0.15s;
+    letter-spacing: 0;
+    text-transform: none;
+    line-height: 1;
+}
+ 
+.stars-input label:hover,
+.stars-input label:hover ~ label,
+.stars-input input:checked ~ label {
+    color: var(--gold);
+}
+ 
+/* SELECT */
+.select-wrap { position: relative; }
+ 
+.select-wrap::after {
+    content: '›';
+    position: absolute;
+    right: 14px; top: 50%;
+    transform: translateY(-50%) rotate(90deg);
+    color: var(--gold);
+    pointer-events: none;
+    font-size: 1rem;
+}
+ 
+.select-wrap select { width: 100%; padding-right: 36px; }
+ 
+/* SUBMIT */
+.btn-submit {
+    display: inline-block;
+    padding: 14px 40px;
+    background: var(--dark);
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-family: 'Lato', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+    align-self: flex-start;
+}
+ 
+.btn-submit:hover { background: var(--gold); color: var(--dark); }
+ 
+/* SUCCESS */
+.success-msg {
+    display: none;
+    background: #fff;
+    border-left: 3px solid var(--gold);
+    padding: 20px 24px;
+    font-size: 0.88rem;
+    color: var(--text);
+    font-weight: 300;
+    line-height: 1.7;
+}
+ 
+.success-msg strong { color: var(--gold); font-weight: 600; }
+ 
+/* ===== COMMENTS SIDE ===== */
+.comments-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+ 
+.comments-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--dark);
+}
+ 
+.comments-count {
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+ 
+.comments-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+ 
+/* COMMENT CARD */
+.comment-card {
+    background: #fff;
+    border-left: 2px solid transparent;
+    padding: 28px 30px 36px;
+    position: relative;
+    transition: border-color 0.3s, background 0.3s;
+    animation: slideIn 0.4s ease forwards;
+}
+ 
+.comment-card:hover {
+    border-left-color: var(--gold);
+    background: #fdfcf9;
+}
+ 
+@keyframes slideIn {
+    from { opacity: 0; transform: translateX(20px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+ 
+.c-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem;
+    line-height: 0.6;
+    color: rgba(201,168,76,0.1);
+    position: absolute;
+    top: 20px; right: 20px;
+    pointer-events: none;
+    user-select: none;
+}
+ 
+.c-stars { display: flex; gap: 3px; margin-bottom: 14px; }
+.c-star { font-size: 0.76rem; }
+ 
+.c-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 400;
+    font-style: italic;
+    color: #555;
+    line-height: 1.85;
+    margin-bottom: 22px;
+}
+ 
+.c-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+ 
+.c-name {
+    font-size: 0.77rem;
+    font-weight: 600;
+    color: var(--dark);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 3px;
+}
+ 
+.c-meta {
+    font-size: 0.7rem;
+    color: var(--muted);
+    font-weight: 300;
+}
+ 
+.c-dest {
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--gold);
+    border: 1px solid rgba(201,168,76,0.35);
+    padding: 3px 10px;
+}
+ 
+.c-date {
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #ccc;
+    position: absolute;
+    bottom: 12px; left: 30px;
+}
+ 
+/* EMPTY STATE */
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--muted);
+}
+ 
+.empty-state .empty-icon {
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    color: rgba(201,168,76,0.2);
+    margin-bottom: 16px;
+    font-style: italic;
+}
+ 
+.empty-state p {
+    font-size: 0.88rem;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    line-height: 1.7;
+}
+ 
+/* ===== FOOTER ===== */
+footer {
+    background-color: #111;
+    color: rgba(255,255,255,0.5);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 50px;
+    font-size: 0.82rem;
+    letter-spacing: 0.08em;
+    border-top: 1px solid rgba(201,168,76,0.15);
+}
+ 
+/* ===== RESPONSIVE ===== */
+@media (max-width: 960px) {
+    .main { grid-template-columns: 1fr; gap: 60px; }
+}
+ 
+@media (max-width: 768px) {
+    header { padding: 14px 20px; }
+    .hamburger { display: flex; }
+    nav {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        padding: 10px 0 4px;
+        border-top: 1px solid rgba(201,168,76,0.2);
+        margin-top: 10px;
+    }
+    nav.open { display: flex; }
+    nav a { padding: 10px 6px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .hero { margin-top: 80px; padding: 60px 24px 50px; }
+    .hero h1 { font-size: 2.2rem; }
+    .main { padding: 60px 20px; }
+    .form-row { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 8px; text-align: center; padding: 20px; }
+}
+ 
+    </style>
+</head>
+<body>
+ 
+<header>
+    <div class="logo"><img src="images/logo.jpeg" alt="Trips with Sara"></div>
+    <button class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+    <nav id="mainNav">
+        <a href="index.html">Accueil</a>
+        <a href="page2.html">Activités</a>
+        <a href="page3.html">Excursions</a>
+        <a href="page4.html">Contact</a>
+        <a href="page5.html" class="active">Avis</a>
+    </nav>
+</header>
+ 
+<section class="hero">
+    <div class="hero-lines"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-eyebrow">Témoignages</div>
+    <h1>Partagez votre <span>expérience</span></h1>
+    <p class="hero-sub">Votre avis compte et aide d'autres voyageurs</p>
+    <div class="PARAG"></div>
+</section>
+ 
+<div class="main">
+ 
+    <!-- FORMULAIRE -->
+    <div class="form-side">
+        <div class="side-label">Laisser un avis</div>
+        <h2 class="side-title">Votre <em>témoignage</em></h2>
+        <p class="side-desc">Vous avez voyagé avec Sara ? Partagez votre expérience avec la communauté de voyageurs.</p>
+ 
+        <div class="review-form" id="reviewForm">
+ 
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Votre prénom</label>
+                    <input type="text" id="f-name" placeholder="Ex : Marie" maxlength="40">
+                </div>
+                <div class="form-group">
+                    <label>Pays</label>
+                    <input type="text" id="f-country" placeholder="Ex : France" maxlength="40">
+                </div>
+            </div>
+ 
+            <div class="form-group">
+                <label>Excursion / Activité</label>
+                <div class="select-wrap">
+                    <select id="f-dest">
+                        <option value="">— Choisir une destination —</option>
+                        <option value="Marrakech">Marrakech</option>
+                        <option value="Essaouira">Essaouira</option>
+                        <option value="Vallée de l'Ourika">Vallée de l'Ourika</option>
+                        <option value="Imlil">Imlil</option>
+                        <option value="Ouarzazate">Ouarzazate</option>
+                        <option value="Autre">Autre</option>
+                    </select>
+                </div>
+            </div>
+ 
+            <div class="form-group stars-group">
+                <div class="stars-label-top">Note</div>
+                <div class="stars-input">
+                    <input type="radio" id="s5" name="stars" value="5">
+                    <label for="s5">★</label>
+                    <input type="radio" id="s4" name="stars" value="4">
+                    <label for="s4">★</label>
+                    <input type="radio" id="s3" name="stars" value="3">
+                    <label for="s3">★</label>
+                    <input type="radio" id="s2" name="stars" value="2">
+                    <label for="s2">★</label>
+                    <input type="radio" id="s1" name="stars" value="1">
+                    <label for="s1">★</label>
+                </div>
+            </div>
+ 
+            <div class="form-group">
+                <label>Votre commentaire</label>
+                <textarea id="f-text" placeholder="Décrivez votre expérience avec nous..." maxlength="600"></textarea>
+            </div>
+ 
+            <div class="success-msg" id="successMsg">
+                <strong>Merci pour votre témoignage !</strong><br>
+                Votre avis a été publié et sera visible par tous les voyageurs.
+            </div>
+ 
+            <button class="btn-submit" onclick="submitReview()">Publier mon avis</button>
+ 
+        </div>
+    </div>
+ 
+    <!-- COMMENTAIRES -->
+    <div class="comments-side">
+        <div class="comments-header">
+            <div class="comments-title">Les avis</div>
+            <div class="comments-count" id="commentsCount">0 témoignages</div>
+        </div>
+        <div class="comments-list" id="commentsList">
+            <div class="empty-state" id="emptyState">
+                <div class="empty-icon">"</div>
+                <p>Soyez le premier à partager<br>votre expérience avec Sara.</p>
+            </div>
+        </div>
+    </div>
+ 
+</div>
+ 
+<footer>
+    <span>Trips with Sara</span>
+    <p>&copy; Marrakech, Morocco — 2026</p>
+</footer>
+ 
+<script>
+function toggleMenu() {
+    var nav = document.getElementById('mainNav');
+    nav.className = nav.className === 'open' ? '' : 'open';
+}
+ 
+const STORAGE_KEY = 'tripswithsara_reviews';
+ 
+function getReviews() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
+    catch(e) { return []; }
+}
+ 
+function saveReviews(reviews) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(reviews));
+}
+ 
+function formatDate(ts) {
+    const d = new Date(ts);
+    return d.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+}
+ 
+function escapeHtml(str) {
+    return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+}
+ 
+function renderCard(review) {
+    const card = document.createElement('div');
+    card.className = 'comment-card';
+    card.innerHTML = `
+        <div class="c-quote">"</div>
+        <div class="c-stars">${Array.from({length:5}, (_,i) =>
+            `<span class="c-star" style="color:${i < review.stars ? 'var(--gold)' : '#ddd'}">★</span>`
+        ).join('')}</div>
+        <p class="c-text">${escapeHtml(review.text)}</p>
+        <div class="c-footer">
+            <div>
+                <div class="c-name">${escapeHtml(review.name)}</div>
+                <div class="c-meta">${escapeHtml(review.country)}</div>
+            </div>
+            ${review.dest ? `<div class="c-dest">${escapeHtml(review.dest)}</div>` : ''}
+        </div>
+        <div class="c-date">${formatDate(review.ts)}</div>
+    `;
+    return card;
+}
+ 
+function updateCount(n) {
+    document.getElementById('commentsCount').textContent =
+        n === 0 ? '0 témoignage' : n === 1 ? '1 témoignage' : `${n} témoignages`;
+}
+ 
+function renderAll() {
+    const list = document.getElementById('commentsList');
+    const empty = document.getElementById('emptyState');
+    const reviews = getReviews();
+    list.querySelectorAll('.comment-card').forEach(c => c.remove());
+    if (reviews.length === 0) {
+        empty.style.display = '';
+    } else {
+        empty.style.display = 'none';
+        [...reviews].reverse().forEach(r => list.appendChild(renderCard(r)));
+    }
+    updateCount(reviews.length);
+}
+ 
+function submitReview() {
+    const name    = document.getElementById('f-name').value.trim();
+    const country = document.getElementById('f-country').value.trim();
+    const dest    = document.getElementById('f-dest').value;
+    const text    = document.getElementById('f-text').value.trim();
+    const starsEl = document.querySelector('input[name="stars"]:checked');
+ 
+    if (!name || !text || !starsEl) {
+        alert('Merci de remplir au minimum votre prénom, une note et un commentaire.');
+        return;
+    }
+ 
+    const review = { name, country: country || '—', dest, stars: parseInt(starsEl.value), text, ts: Date.now() };
+    const reviews = getReviews();
+    reviews.push(review);
+    saveReviews(reviews);
+ 
+    document.getElementById('f-name').value = '';
+    document.getElementById('f-country').value = '';
+    document.getElementById('f-dest').value = '';
+    document.getElementById('f-text').value = '';
+    document.querySelectorAll('input[name="stars"]').forEach(i => i.checked = false);
+ 
+    const msg = document.getElementById('successMsg');
+    msg.style.display = 'block';
+    setTimeout(() => { msg.style.display = 'none'; }, 4000);
+ 
+    renderAll();
+}
+ 
+renderAll();
+</script>
+ 
+</body>
+</html>

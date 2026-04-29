@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <title>Contact – Trips with Sara</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;600&display=swap" rel="stylesheet"/>
+    <style>
+ 
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+ 
+:root {
+    --gold: #c9a84c;
+    --dark: #1a1a1a;
+    --bg: #faf9f7;
+    --text: #2c2c2c;
+}
+ 
+body {
+    font-family: 'Lato', sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+}
+ 
+/* ===== HEADER ===== */
+header {
+    background-color: rgba(26,26,26,0.95);
+    backdrop-filter: blur(10px);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 50px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid rgba(201,168,76,0.3);
+    flex-wrap: wrap;
+}
+ 
+.logo img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+ 
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    width: 34px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 4px;
+}
+.hamburger span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: var(--gold);
+    border-radius: 2px;
+}
+ 
+nav { display: flex; align-items: center; }
+ 
+nav a {
+    color: #ddd;
+    padding: 6px 14px;
+    text-decoration: none;
+    font-size: 0.85em;
+    text-transform: uppercase;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    position: relative;
+}
+ 
+nav a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 0;
+    height: 2px;
+    background: var(--gold);
+    transition: width 0.3s ease;
+}
+ 
+nav a:hover { color: var(--gold); }
+nav a:hover::after { width: 100%; }
+nav a.active { color: var(--gold); }
+nav a.active::after { width: 100%; }
+ 
+/* ===== PAGE TITLE ===== */
+.page-title {
+    text-align: center;
+    padding: 140px 20px 50px;
+}
+ 
+.page-title h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    color: var(--dark);
+    margin-bottom: 6px;
+}
+ 
+.page-title p {
+    color: #777;
+    font-size: 1rem;
+    font-weight: 300;
+    max-width: 520px;
+    margin: 16px auto 0;
+    line-height: 1.7;
+}
+ 
+.gold-line {
+    width: 60px;
+    height: 2px;
+    background: var(--gold);
+    margin: 10px auto 0;
+}
+ 
+/* ===== CONTACT SECTION ===== */
+.contact-wrapper {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 10px 30px 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+ 
+.contact-card {
+    background: #fff;
+    border: 1px solid #e8e0d0;
+    border-left: 5px solid var(--gold);
+    border-radius: 0 8px 8px 0;
+    padding: 32px 36px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    transition: box-shadow 0.3s ease;
+}
+ 
+.contact-card:hover {
+    box-shadow: 0 8px 36px rgba(0,0,0,0.11);
+}
+ 
+.contact-card .card-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 8px;
+}
+ 
+.contact-card .icon { font-size: 1.6rem; line-height: 1; }
+ 
+.contact-card h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: var(--dark);
+}
+ 
+.contact-card .subtitle {
+    font-size: 0.88rem;
+    color: #888;
+    font-weight: 300;
+    margin-bottom: 20px;
+    padding-left: 2px;
+}
+ 
+.wa-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+ 
+.wa-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 13px 18px;
+    background: #f5f0e8;
+    border: 1px solid #e0d5c0;
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--dark);
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: background 0.2s, border-color 0.2s;
+}
+ 
+.wa-btn:hover {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: #fff;
+}
+ 
+.wa-btn .wa-icon { font-size: 1.2rem; }
+.wa-btn .wa-num { font-weight: 600; letter-spacing: 0.03em; }
+ 
+.contact-note {
+    font-size: 0.82rem;
+    color: #999;
+    font-weight: 300;
+    font-style: italic;
+}
+ 
+.insta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 13px 22px;
+    background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
+    color: #fff;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    transition: opacity 0.2s;
+}
+ 
+.insta-btn:hover { opacity: 0.88; }
+.insta-btn .insta-icon { font-size: 1.2rem; }
+ 
+/* ===== FOOTER ===== */
+footer {
+    background-color: #111;
+    color: rgba(255,255,255,0.5);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 50px;
+    font-size: 0.82rem;
+    letter-spacing: 0.08em;
+    border-top: 1px solid rgba(201,168,76,0.15);
+}
+ 
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    header { padding: 14px 20px; }
+    .hamburger { display: flex; }
+    nav {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        padding: 10px 0 4px;
+        border-top: 1px solid rgba(201,168,76,0.2);
+        margin-top: 10px;
+    }
+    nav.open { display: flex; }
+    nav a { padding: 10px 6px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .page-title { padding: 120px 20px 30px; }
+    .page-title h1 { font-size: 2rem; }
+    .contact-wrapper { padding: 10px 16px 60px; }
+    .contact-card { padding: 24px 20px; }
+    footer { flex-direction: column; gap: 8px; text-align: center; padding: 20px; }
+}
+ 
+    </style>
+</head>
+<body>
+ 
+<header>
+    <div class="logo"><img src="images/logo.jpeg" alt="logo"></div>
+    <button class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+    <nav id="mainNav">
+        <a href="index.html">Accueil</a>
+        <a href="page2.html">Activités</a>
+        <a href="page3.html">Excursions</a>
+        <a href="page4.html" class="active">Contact</a>
+        <a href="page5.html">Avis</a>
+    </nav>
+</header>
+ 
+<div class="page-title">
+    <h1>📞 Contactez-nous</h1>
+    <div class="gold-line"></div>
+    <p>Nous sommes à votre disposition pour organiser vos excursions et expériences sur mesure à Marrakech et ses alentours.</p>
+</div>
+ 
+<div class="contact-wrapper">
+ 
+    <div class="contact-card">
+        <div class="card-header">
+            <span class="icon">💬</span>
+            <h2>WhatsApp</h2>
+        </div>
+        <p class="subtitle">Contact rapide pour réservations et demandes</p>
+        <div class="wa-list">
+            <a class="wa-btn" href="https://wa.me/212601629828" target="_blank">
+                <span class="wa-icon">📱</span>
+                <span class="wa-num">+212 601 629 828</span>
+            </a>
+            <a class="wa-btn" href="https://wa.me/212684873828" target="_blank">
+                <span class="wa-icon">📱</span>
+                <span class="wa-num">+212 684 873 828</span>
+            </a>
+            <a class="wa-btn" href="https://wa.me/212628881543" target="_blank">
+                <span class="wa-icon">📱</span>
+                <span class="wa-num">+212 628 881 543</span>
+            </a>
+        </div>
+        <p class="contact-note">👉 Cliquez et envoyez-nous un message directement pour une réponse rapide.</p>
+    </div>
+ 
+    <div class="contact-card">
+        <div class="card-header">
+            <span class="icon">📸</span>
+            <h2>Instagram</h2>
+        </div>
+        <p class="subtitle">Suivez-nous pour découvrir nos expériences et inspirations voyages</p>
+        <a class="insta-btn" href="https://instagram.com/tripswith_sara" target="_blank">
+            <span class="insta-icon">📸</span>
+            @tripswith_sara
+        </a>
+    </div>
+ 
+</div>
+ 
+<footer>
+    <span>Trips with Sara</span>
+    <p>&copy; Marrakech, Morocco — 2026</p>
+</footer>
+ 
+<script>
+function toggleMenu() {
+    var nav = document.getElementById('mainNav');
+    nav.className = nav.className === 'open' ? '' : 'open';
+}
+</script>
+ 
+</body>
+</html>
+ 

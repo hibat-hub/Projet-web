@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <title>Activités - Trips with Sara</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;600&display=swap" rel="stylesheet"/>
+    <style>
+ 
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+ 
+:root {
+    --gold: #c9a84c;
+    --dark: #1a1a1a;
+    --bg: #faf9f7;
+    --text: #2c2c2c;
+}
+ 
+body {
+    font-family: 'Lato', sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+}
+ 
+/* ===== HEADER ===== */
+header {
+    background-color: rgba(26,26,26,0.95);
+    backdrop-filter: blur(10px);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 50px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid rgba(201,168,76,0.3);
+    flex-wrap: wrap;
+}
+ 
+.logo img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+ 
+.barrenav {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    width: 34px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 4px;
+}
+.barrenav span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: var(--gold);
+    border-radius: 2px;
+}
+ 
+nav { display: flex; align-items: center; }
+ 
+nav a {
+    color: #ddd;
+    padding: 6px 14px;
+    text-decoration: none;
+    font-size: 0.85em;
+    text-transform: uppercase;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    position: relative;
+}
+ 
+nav a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 0;
+    height: 2px;
+    background: var(--gold);
+    transition: width 0.3s ease;
+}
+ 
+nav a:hover { color: var(--gold); }
+nav a:hover::after { width: 100%; }
+nav a.active { color: var(--gold); }
+nav a.active::after { width: 100%; }
+ 
+/* ===== HERO ===== */
+.up-text {
+    margin-top: 116px;
+    padding: 80px 40px 60px;
+    text-align: center;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2c2416 100%);
+    color: white;
+}
+ 
+.up-text h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    margin-bottom: 12px;
+    letter-spacing: 0.03em;
+}
+ 
+.up-text p {
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 0.85rem;
+}
+ 
+.PARAG {
+    width: 60px;
+    height: 2px;
+    background: var(--gold);
+    margin: 20px auto 0;
+}
+ 
+/* ===== ACTIVITIES SECTION ===== */
+.activities-section {
+    padding: 80px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+ 
+/* ===== ACTIVITY CARD ===== */
+.activity {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: stretch;
+    margin-bottom: 90px;
+    background: #fff;
+    border: 1px solid #e8e0d0;
+    border-top: 4px solid var(--gold);
+    box-shadow: 0 8px 40px rgba(0,0,0,0.07);
+    overflow: hidden;
+    transition: box-shadow 0.3s ease;
+}
+ 
+.activity:hover { box-shadow: 0 20px 70px rgba(0,0,0,0.13); }
+.activity:nth-child(even) { direction: rtl; }
+.activity:nth-child(even) > * { direction: ltr; }
+ 
+/* ===== MINI SLIDESHOW ===== */
+.activity-slider {
+    position: relative;
+    overflow: hidden;
+    min-height: 380px;
+}
+ 
+.activity-slider .slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+    background-size: cover;
+    background-position: center;
+}
+ 
+.activity-slider .slide.active { opacity: 1; }
+ 
+.activity-slider .s-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    width: 34px;
+    height: 34px;
+    background: rgba(201,168,76,0.85);
+    border: none;
+    color: white;
+    font-size: 1.4rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+ 
+.activity-slider .s-arrow:hover { background: var(--gold); }
+.activity-slider .s-arrow.prev { left: 10px; }
+.activity-slider .s-arrow.next { right: 10px; }
+ 
+.activity-slider .s-dots {
+    position: absolute;
+    bottom: 12px;
+    left: 0; right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 7px;
+    z-index: 10;
+}
+ 
+.activity-slider .s-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.5);
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+}
+ 
+.activity-slider .s-dot.active {
+    background: var(--gold);
+    transform: scale(1.3);
+}
+ 
+/* ===== ACTIVITY CONTENT ===== */
+.activity-content {
+    padding: 40px 45px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+ 
+.activity-number {
+    font-family: 'Playfair Display', serif;
+    color: var(--gold);
+    font-size: 0.9rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+ 
+.activity-content h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.9rem;
+    color: var(--dark);
+    margin-bottom: 15px;
+}
+ 
+.activity-content .meta {
+    color: #888;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 18px;
+}
+ 
+.activity-content p {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.85;
+    font-weight: 300;
+    margin-bottom: 25px;
+}
+ 
+/* ===== FOOTER ===== */
+footer {
+    background-color: #111;
+    color: rgba(255,255,255,0.5);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 50px;
+    font-size: 0.82rem;
+    letter-spacing: 0.08em;
+    border-top: 1px solid rgba(201,168,76,0.15);
+}
+ 
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    header { padding: 14px 20px; }
+    .barrenav { display: flex; }
+    nav {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        padding: 10px 0 4px;
+        border-top: 1px solid rgba(201,168,76,0.2);
+        margin-top: 10px;
+    }
+    nav.open { display: flex; }
+    nav a { padding: 10px 6px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .up-text { margin-top: 80px; padding: 50px 20px 40px; }
+    .up-text h1 { font-size: 2rem; }
+    .activities-section { padding: 50px 20px; }
+    .activity, .activity:nth-child(even) { grid-template-columns: 1fr; direction: ltr; }
+    .activity-slider { min-height: 260px; }
+    .activity-content { padding: 30px 25px; }
+    .activity-content h2 { font-size: 1.5rem; }
+    footer { flex-direction: column; gap: 8px; text-align: center; padding: 20px; }
+}
+ 
+    </style>
+</head>
+<body>
+ 
+<header>
+    <div class="logo"><img src="images/logo.jpeg" alt="logo"></div>
+    <button class="barrenav" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+    <nav id="mainNav">
+        <a href="index.html">Accueil</a>
+        <a href="page2.html" class="active">Activités</a>
+        <a href="page3.html">Excursions</a>
+        <a href="page4.html">Contact</a>
+        <a href="page5.html">Avis</a>
+    </nav>
+</header>
+ 
+<section class="up-text">
+    <p>Découvrez</p>
+    <h1>Nos Activités</h1>
+    <div class="PARAG"></div>
+</section>
+ 
+<section class="activities-section">
+ 
+    <article class="activity">
+        <div class="activity-slider" data-slides='["images/agafay-normal-1.jpeg","images/agafay-normal-2.jpeg","images/agafay-normal-3.jpeg","images/agafay-normal-4.jpeg","images/agafay-normal-5.jpeg"]'>
+            <div class="s-dots"></div>
+            <button class="s-arrow prev">&#8249;</button>
+            <button class="s-arrow next">&#8250;</button>
+        </div>
+        <div class="activity-content">
+            <div class="activity-number">— 01 —</div>
+            <h2>Désert d'Agafay</h2>
+            <div class="meta">Demi-journée &nbsp;•&nbsp; 40 min de Marrakech</div>
+            <p>Vivez un moment hors du temps avec une vue imprenable sur le coucher de soleil dans un camp traditionnel dans le désert d'Agafay. Une expérience idéale pour les couples, familles ou groupes d'amis à la recherche d'authenticité.</p>
+        </div>
+    </article>
+ 
+    <article class="activity">
+        <div class="activity-slider" data-slides='["images/agafay-luxe-1.jpg","images/agafay-luxe-2.jpg","images/agafay-luxe-3.jpg","images/agafay-luxe-4.jpg"]'>
+            <div class="s-dots"></div>
+            <button class="s-arrow prev">&#8249;</button>
+            <button class="s-arrow next">&#8250;</button>
+        </div>
+        <div class="activity-content">
+            <div class="activity-number">— 02 —</div>
+            <h2>Agafay — Expérience de Luxe</h2>
+            <div class="meta">Soirée &amp; nuit étoilée &nbsp;•&nbsp; Camp privé</div>
+            <p>Plongez dans une expérience authentique au cœur du désert d'Agafay avec Trips with Sara. À seulement quelques kilomètres de Marrakech, découvrez un cadre naturel unique, entre collines arides et ambiance berbère traditionnelle.</p>
+        </div>
+    </article>
+ 
+    <article class="activity">
+        <div class="activity-slider" data-slides='["images/parachute-1.jpg","images/parachute-3.jpg"]'>
+            <div class="s-dots"></div>
+            <button class="s-arrow prev">&#8249;</button>
+            <button class="s-arrow next">&#8250;</button>
+        </div>
+        <div class="activity-content">
+            <div class="activity-number">— 03 —</div>
+            <h2>Parapente</h2>
+            <div class="meta">3 à 4 heures &nbsp;•&nbsp; Région de Marrakech</div>
+            <p>Prêt(e) à vivre une montée d'adrénaline avec une vue à couper le souffle ? 🌄 Avec Trips with Sara, envolez-vous au-dessus des paysages spectaculaires du Maroc !</p>
+        </div>
+    </article>
+ 
+    <article class="activity">
+        <div class="activity-slider" data-slides='["images/Montgolfiére-1.jpg","images/Montgolfiére-2.jpg","images/Montgolfiére-3.jpg"]'>
+            <div class="s-dots"></div>
+            <button class="s-arrow prev">&#8249;</button>
+            <button class="s-arrow next">&#8250;</button>
+        </div>
+        <div class="activity-content">
+            <div class="activity-number">— 04 —</div>
+            <h2>Montgolfière</h2>
+            <div class="meta">Demi-journée &nbsp;•&nbsp; Montagnes de l'Atlas</div>
+            <p>Vivez une expérience inoubliable dans le ciel de Marrakech avec Trips with Sara. Offrez-vous un moment magique au lever du soleil, au-dessus des paysages spectaculaires du désert et des villages berbères.</p>
+        </div>
+    </article>
+ 
+    <article class="activity">
+        <div class="activity-slider" data-slides='["images/city-tour-1.jpg","images/city-tour-2.jpg","images/city-tour-3.jpg","images/city-tour-4.jpg"]'>
+            <div class="s-dots"></div>
+            <button class="s-arrow prev">&#8249;</button>
+            <button class="s-arrow next">&#8250;</button>
+        </div>
+        <div class="activity-content">
+            <div class="activity-number">— 05 —</div>
+            <h2>City Tour de Marrakech</h2>
+            <div class="meta">Journée complète &nbsp;•&nbsp; Médina</div>
+            <p>Découvrez la magie de la ville rouge avec Trips with Sara ❤️ Un city tour authentique pour explorer les incontournables et les trésors cachés !</p>
+        </div>
+    </article>
+ 
+</section>
+ 
+<footer>
+    <span>Trips with Sara</span>
+    <p>&copy; Marrakech, Morocco — 2026</p>
+</footer>
+ 
+<script>
+function toggleMenu() {
+    var nav = document.getElementById('mainNav');
+    nav.className = nav.className === 'open' ? '' : 'open';
+}
+ 
+document.querySelectorAll('.activity-slider').forEach(function(slider) {
+    var images = JSON.parse(slider.dataset.slides);
+    var dotsEl = slider.querySelector('.s-dots');
+    var current = 0;
+ 
+    images.forEach(function(src, i) {
+        var div = document.createElement('div');
+        div.className = 'slide' + (i === 0 ? ' active' : '');
+        div.style.backgroundImage = "url('" + src + "')";
+        slider.insertBefore(div, dotsEl);
+    });
+ 
+    images.forEach(function(_, i) {
+        var d = document.createElement('button');
+        d.className = 's-dot' + (i === 0 ? ' active' : '');
+        d.onclick = function() { goTo(i); };
+        dotsEl.appendChild(d);
+    });
+ 
+    var allSlides = slider.querySelectorAll('.slide');
+    var allDots = dotsEl.querySelectorAll('.s-dot');
+ 
+    if (images.length <= 1) {
+        slider.querySelectorAll('.s-arrow').forEach(function(a) { a.style.display = 'none'; });
+        dotsEl.style.display = 'none';
+    }
+ 
+    function goTo(n) {
+        allSlides[current].classList.remove('active');
+        allDots[current].classList.remove('active');
+        current = (n + images.length) % images.length;
+        allSlides[current].classList.add('active');
+        allDots[current].classList.add('active');
+    }
+ 
+    slider.querySelector('.s-arrow.prev').onclick = function() { goTo(current - 1); };
+    slider.querySelector('.s-arrow.next').onclick = function() { goTo(current + 1); };
+});
+</script>
+ 
+</body>
+</html>
+ 
