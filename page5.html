@@ -48,7 +48,7 @@ header {
     object-fit: cover;
 }
  
-.hamburger {
+.barrenav {
     display: none;
     flex-direction: column;
     gap: 5px;
@@ -58,7 +58,7 @@ header {
     border: none;
     padding: 4px;
 }
-.hamburger span {
+.barrenav span {
     display: block;
     width: 100%;
     height: 2px;
@@ -95,7 +95,7 @@ nav a:hover::after { width: 100%; }
 nav a.active { color: var(--gold); }
 nav a.active::after { width: 100%; }
 
-.hero {
+.up-text {
     margin-top: 116px;
     min-height: 340px;
     background: linear-gradient(135deg, #1a1a1a 0%, #2c2416 100%);
@@ -109,13 +109,13 @@ nav a.active::after { width: 100%; }
     overflow: hidden;
 }
  
-.hero-lines {
+.up-text-lines {
     position: absolute; inset: 0;
     background-image: repeating-linear-gradient(90deg, rgba(201,168,76,0.04) 0px, rgba(201,168,76,0.04) 1px, transparent 1px, transparent 80px);
     pointer-events: none;
 }
  
-.hero-glow {
+.up-text-glow {
     position: absolute;
     width: 600px; height: 300px;
     background: radial-gradient(ellipse, rgba(201,168,76,0.07) 0%, transparent 70%);
@@ -124,7 +124,7 @@ nav a.active::after { width: 100%; }
     pointer-events: none;
 }
  
-.hero-eyebrow {
+.up-text-eyebrow {
     font-size: 0.75rem;
     letter-spacing: 0.35em;
     text-transform: uppercase;
@@ -138,7 +138,7 @@ nav a.active::after { width: 100%; }
     display: inline-block;
 }
  
-.hero h1 {
+.up-text h1 {
     font-family: 'Playfair Display', serif;
     font-size: 3.2rem;
     font-weight: 600;
@@ -150,9 +150,9 @@ nav a.active::after { width: 100%; }
     animation: fadeUp 0.8s 0.4s forwards;
 }
  
-.hero h1 span { color: var(--gold); font-style: italic; }
+.up-text h1 span { color: var(--gold); font-style: italic; }
  
-.hero-sub {
+.up-text-sub {
     font-size: 0.85rem;
     color: rgba(255,255,255,0.45);
     letter-spacing: 0.2em;
@@ -498,7 +498,7 @@ footer {
  
 @media (max-width: 768px) {
     header { padding: 14px 20px; }
-    .hamburger { display: flex; }
+    .barrenav { display: flex; }
     nav {
         display: none;
         flex-direction: column;
@@ -509,8 +509,8 @@ footer {
     }
     nav.open { display: flex; }
     nav a { padding: 10px 6px; border-bottom: 1px solid rgba(255,255,255,0.05); }
-    .hero { margin-top: 80px; padding: 60px 24px 50px; }
-    .hero h1 { font-size: 2.2rem; }
+    .up-text { margin-top: 80px; padding: 60px 24px 50px; }
+    .up-text h1 { font-size: 2.2rem; }
     .main { padding: 60px 20px; }
     .form-row { grid-template-columns: 1fr; }
     footer { flex-direction: column; gap: 8px; text-align: center; padding: 20px; }
@@ -522,7 +522,7 @@ footer {
  
 <header>
     <div class="logo"><img src="images/logo.jpeg" alt="Trips with Sara"></div>
-    <button class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+    <button class="barrenav" onclick="toggleMenu()"><span></span><span></span><span></span></button>
     <nav id="mainNav">
         <a href="index.html">Accueil</a>
         <a href="page2.html">Activités</a>
@@ -532,12 +532,12 @@ footer {
     </nav>
 </header>
  
-<section class="hero">
-    <div class="hero-lines"></div>
-    <div class="hero-glow"></div>
-    <div class="hero-eyebrow">Témoignages</div>
+<section class="up-text">
+    <div class="up-text-lines"></div>
+    <div class="up-text-glow"></div>
+    <div class="up-text-eyebrow">Témoignages</div>
     <h1>Partagez votre <span>expérience</span></h1>
-    <p class="hero-sub">Votre avis compte et aide d'autres voyageurs</p>
+    <p class="up-text-sub">Votre avis compte et aide d'autres voyageurs</p>
     <div class="PARAG"></div>
 </section>
  
