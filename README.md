@@ -194,7 +194,7 @@ section#accueil::after {
     color: white;
 }
  Le texte est au-dessus du dégradé (z-index: 2), centré, avec espace en bas.
-css.UP-text h1 {
+.UP-text h1 {
     font-family: 'Playfair Display', serif;
     font-size: 3rem;
     text-shadow: 0 2px 20px rgba(0,0,0,0.5);
